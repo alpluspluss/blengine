@@ -1,11 +1,11 @@
 const std = @import("std");
 const testing = std.testing;
-const HtmlElement = @import("../src/render/html/element.zig").HtmlElement;
+const blengine = @import("blengine");
 
 test "html element creation" {
     const allocator = testing.allocator;
 
-    var div = try HtmlElement.init(allocator, "div");
+    var div = try blengine.HtmlElement.init(allocator, "div");
     defer div.deinit();
 
     try testing.expectEqualStrings(div.tag, "div");
@@ -15,12 +15,12 @@ test "html element creation" {
 test "html element rendering" {
     const allocator = testing.allocator;
 
-    var div = try HtmlElement.init(allocator, "div");
+    var div = try blengine.HtmlElement.init(allocator, "div");
     defer div.deinit();
 
     try div.setAttribute("class", "container");
 
-    var span = try HtmlElement.init(allocator, "span");
+    var span = try blengine.HtmlElement.init(allocator, "span");
     span.inner_text = try allocator.dupe(u8, "Hello");
     try div.appendChild(span);
 

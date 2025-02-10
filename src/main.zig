@@ -1,6 +1,7 @@
 const std = @import("std");
-const Processor = @import("processor.zig").Processor;
-const Node = @import("ast/node.zig").Node;
+pub const Node = @import("ast/node.zig").Node;
+pub const Processor = @import("processor.zig").Processor;
+pub const HtmlElement = @import("render/html/element.zig").HtmlElement;
 
 fn debugPlugin(node: *Node) !void {
     std.debug.print("Node type: {}\n", .{node.node_type});

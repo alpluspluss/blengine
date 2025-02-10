@@ -1,12 +1,11 @@
 const std = @import("std");
 const testing = std.testing;
-const Processor = @import("../src/processor.zig").Processor;
-const Node = @import("../src/ast/node.zig").Node;
+const blengine = @import("blengine");
 
 test "processor initialization" {
     const allocator = testing.allocator;
 
-    var processor = try Processor.init(allocator);
+    var processor = try blengine.Processor.init(allocator);
     defer processor.deinit();
 
     try testing.expectEqual(processor.plugins.items.len, 0);
@@ -15,11 +14,11 @@ test "processor initialization" {
 test "processor plugin registration" {
     const allocator = testing.allocator;
 
-    var processor = try Processor.init(allocator);
+    var processor = try blengine.Processor.init(allocator);
     defer processor.deinit();
 
     const test_plugin = struct {
-        fn transform(node: *Node) !void {
+        fn transform(node: *blengine.Node) !void {
             _ = node;
         }
     }.transform;
